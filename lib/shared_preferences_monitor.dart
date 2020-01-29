@@ -2,8 +2,7 @@ library shared_preferences_monitor;
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'shared_preferences_page.dart';
+import 'package:shared_preferences_monitor/widget/widget.dart';
 
 class SharedPreferencesMonitor {
   static SharedPreferences sharedPreferences;
@@ -11,6 +10,10 @@ class SharedPreferencesMonitor {
 
   static Future<void> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setInt('primeiro', 1);
+    sharedPreferences.setInt('segundo', 2);
+    sharedPreferences.setInt('terceiro', 3);
+    sharedPreferences.setInt('quarto', 4);
   }
 
   static void setKey(GlobalKey<NavigatorState> key) {
@@ -38,7 +41,7 @@ class SharedPreferencesMonitor {
 
     navigatorKey.currentState.push(
       MaterialPageRoute(
-        builder: (_) => SharedPreferencesPage(),
+        builder: (_) => SharedPreferencesWidget(),
       ),
     );
   }
