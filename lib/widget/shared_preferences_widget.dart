@@ -11,6 +11,16 @@ class SharedPreferencesWidget extends StatefulWidget {
 }
 
 class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
+  GlobalKey<FormState> formKey;
+  String key;
+  dynamic value;
+
+  @override
+  void initState() {
+    formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+
   void rebuild() {
     setState(() {});
   }
@@ -25,8 +35,37 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
           IconButton(
             icon: Icon(Icons.delete_sweep),
             onPressed: () async {
-              clearAllPrefs();
-              rebuild();
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text(
+                    'Are you sure you want do delete all preferences? That action can\'t be undone.',
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        'No',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.red,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        clearAllPrefs();
+                        rebuild();
+                      },
+                    ),
+                  ],
+                ),
+              );
             },
           )
         ],
@@ -41,13 +80,87 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
               return KeyValueRow(
                 keyValueInfo.keys.toList().elementAt(i - 1),
                 keyValueInfo.values.toList().elementAt(i - 1),
-                onDelete: rebuild,
+                onUpdate: rebuild,
               );
             }
           },
           itemCount: keyValueInfo.length + 1,
           separatorBuilder: (_, i) => Divider(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => SimpleDialog(
+              title: Text('Add a preference:'),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Key',
+                          ),
+                          validator: (keyChanged) =>
+                              keyChanged.isEmpty ? 'Required field' : null,
+                          onChanged: (keyChanged) {
+                            key = keyChanged;
+                          },
+                        ),
+                        SizedBox(height: 8),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Value',
+                          ),
+                          validator: (valueChanged) =>
+                              valueChanged.isEmpty ? 'Required field' : null,
+                          onChanged: (valueChanged) {
+                            value = valueChanged;
+                          },
+                        ),
+                        SizedBox(height: 8),
+                        RaisedButton(
+                          child: Text('ADD'),
+                          onPressed: () async {
+                            if (formKey.currentState.validate()) {
+                              int valueInt = int.tryParse(value);
+                              double valueDouble = double.tryParse(value);
+                              bool valueBool;
+                              if (value == 'true' || value == 'false') {
+                                valueBool = value == 'true';
+                              }
+                              if (valueInt != null) {
+                                await SharedPreferencesMonitor.sharedPreferences
+                                    .setInt(key, valueInt);
+                              } else if (valueDouble != null) {
+                                await SharedPreferencesMonitor.sharedPreferences
+                                    .setDouble(key, valueDouble);
+                              } else if (valueBool != null) {
+                                await SharedPreferencesMonitor.sharedPreferences
+                                    .setBool(key, valueBool);
+                              } else {
+                                await SharedPreferencesMonitor.sharedPreferences
+                                    .setString(key, value);
+                              }
+                            }
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

@@ -4,8 +4,6 @@ import 'package:shared_preferences_monitor/shared_preferences_monitor.dart';
 void main() async {
   await SharedPreferencesMonitor.init();
   SharedPreferencesMonitor.setKey(GlobalKey<NavigatorState>());
-  final map = SharedPreferencesMonitor.getKeyValueInfo();
-  print(map);
   runApp(MyApp());
 }
 
@@ -37,14 +35,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.remove_red_eye),
-        onPressed: () {
-          SharedPreferencesMonitor.showPage();
-        },
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: () => SharedPreferencesMonitor.showPage(),
+          )
+        ],
       ),
+      body: Container(),
     );
   }
 }

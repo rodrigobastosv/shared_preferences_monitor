@@ -4,6 +4,7 @@ class KeyValueFirstRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Flexible(
           flex: 2,
@@ -18,9 +19,6 @@ class KeyValueFirstRow extends StatelessWidget {
             ),
           ),
         ),
-        Spacer(
-          flex: 1,
-        ),
         Flexible(
           flex: 2,
           fit: FlexFit.tight,
@@ -31,6 +29,15 @@ class KeyValueFirstRow extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Opacity(
+            opacity: 0,
+            child: Icon(
+              Icons.delete,
             ),
           ),
         ),
