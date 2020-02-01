@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../shared_preferences_monitor.dart';
 
 class KeyValueRow extends StatelessWidget {
-  const KeyValueRow(this.keyname, this.value, {this.onUpdate});
+  const KeyValueRow(this.keyname, this.value, {this.onUpdate, this.readOnly});
 
   final String keyname;
   final dynamic value;
   final VoidCallback onUpdate;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +94,11 @@ class KeyValueRow extends StatelessWidget {
                   ),
                 );
               },
-              child: Icon(
-                Icons.delete,
-              ),
+              child: readOnly
+                  ? SizedBox()
+                  : Icon(
+                      Icons.delete,
+                    ),
             ),
           )
         ],

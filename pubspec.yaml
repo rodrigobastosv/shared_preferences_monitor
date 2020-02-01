@@ -1,8 +1,7 @@
 name: shared_preferences_monitor
-description: A new Flutter package project.
-version: 0.0.1
-author:
-homepage:
+description: A simple monitor for the Shared Preferences of your app. With it you can manage your preferences and add and delete preferences.
+version: 1.0.1
+homepage: https://github.com/rodrigobastosv/shared_preferences_monitor
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

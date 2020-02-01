@@ -1,14 +1,62 @@
-# shared_preferences_monitor
+Package created to make it easy to see the state of the shared preferences of your app. I always find myself in a hard spot 
+when trying to see the current state of my preferences. This package come to manage your preferences in an easy way.
+ 
+## How to use
+  
+```dart
+void main() async {
+  await SharedPreferencesMonitor.init();
+  SharedPreferencesMonitor.setKey(GlobalKey<NavigatorState>());
+  runApp(MyApp());
+}
+```
 
-A new Flutter package project.
+To use it you only have to init the monitor calling the `SharedPreferencesMonitor.init()` method and set
+a global key to the monitor so it can handle navigation.
 
-## Getting Started
+```dart
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: SharedPreferencesMonitor.getKey(),
+      title: 'Flutter Shared Preferences Monitor',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+```
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+And the last step to configure is to pass the monitor key to the material app `navigatorKey: SharedPreferencesMonitor.getKey()`
+and you are ready to go.
+ 
+The monitor looks like this:
+ 
+![monitor](https://s5.gifyu.com/images/19962549af1bab3c7.png)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+You can add new preferences or delete them.
+
+You can at anytime call `SharedPreferencesMonitor.getKeyValueInfo()` and it will return a Map with your keys
+and values of the current state of the shared preferences.
+
+```javascript
+{pref2: 2, pref1: 1, pref4: 4, pref3: 3}
+```
+
+## Important
+The mainly idea of the package is to be used ONLY on development. You will never want your users messing up their
+preferences.
+
+## Todo
+
+- [ ] Tests
+
+## Features and Bugs
+
+Please sugest new features and report bugs on [issue tracker][tracker].
+
+[tracker]: https://github.com/rodrigobastosv/shared_preferences_monitor/issues

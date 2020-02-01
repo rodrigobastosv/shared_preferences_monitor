@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences_monitor/shared_preferences_monitor.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesMonitor.init();
+  SharedPreferencesMonitor.sharedPreferences.setInt('pref1', 1);
+  SharedPreferencesMonitor.sharedPreferences.setInt('pref2', 2);
+  SharedPreferencesMonitor.sharedPreferences.setInt('pref3', 3);
+  SharedPreferencesMonitor.sharedPreferences.setInt('pref4', 4);
+  print(SharedPreferencesMonitor.getKeyValueInfo());
   SharedPreferencesMonitor.setKey(GlobalKey<NavigatorState>());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Container(),
+      body: Container(
+        child: Center(
+          child: Text('Click on appbar icon to see the preferences'),
+        ),
+      ),
     );
   }
 }

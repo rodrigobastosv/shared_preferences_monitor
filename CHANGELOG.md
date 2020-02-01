@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.1]
 
-* TODO: Describe initial release.
+- Fix broken monitor image 
+
+## [1.0.0]
+
+- First release 
