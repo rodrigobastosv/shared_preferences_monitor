@@ -1,3 +1,7 @@
+## [1.0.1+1]
+
+- Updating documentation and dependencies
+
 ## [1.0.1]
 
 - Fix broken monitor image 
