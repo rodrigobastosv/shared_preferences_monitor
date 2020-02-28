@@ -33,6 +33,12 @@ class MyApp extends StatelessWidget {
 
 And the last step to configure is to pass the monitor key to the material app `navigatorKey: SharedPreferencesMonitor.getKey()`
 and you are ready to go.
+
+Navigating to the monitor page is easy, just call:
+
+```dart
+SharedPreferencesMonitor.showPage();
+```
  
 The monitor looks like this:
  
