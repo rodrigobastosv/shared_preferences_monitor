@@ -1,6 +1,6 @@
 name: shared_preferences_monitor
 description: A simple monitor for the Shared Preferences of your app. With it you can manage your preferences and add and delete preferences.
-version: 2.0.0-nullsafety.0
+version: 2.0.0
 homepage: https://github.com/rodrigobastosv/shared_preferences_monitor
 
 environment:
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.0.0-nullsafety.1
+  shared_preferences: ^2.0.3
 
 dev_dependencies:
   flutter_test:
