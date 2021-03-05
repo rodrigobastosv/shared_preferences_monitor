@@ -5,7 +5,9 @@ import 'key_value_first_row.dart';
 import 'key_value_row.dart';
 
 class SharedPreferencesWidget extends StatefulWidget {
-  SharedPreferencesWidget({this.readOnly});
+  SharedPreferencesWidget({
+    required this.readOnly,
+  });
 
   final bool readOnly;
 
@@ -15,9 +17,10 @@ class SharedPreferencesWidget extends StatefulWidget {
 }
 
 class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
-  GlobalKey<FormState> formKey;
-  String key;
+  late GlobalKey<FormState> formKey;
+  late String key;
   dynamic value;
+
   bool get readOnly => widget.readOnly;
 
   @override
@@ -49,7 +52,7 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
                           'Are you sure you want do delete all preferences? That action can\'t be undone.',
                         ),
                         actions: <Widget>[
-                          FlatButton(
+                          TextButton(
                             child: Text(
                               'No',
                               style: TextStyle(color: Colors.black),
@@ -117,7 +120,7 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
                                   border: OutlineInputBorder(),
                                   labelText: 'Key',
                                 ),
-                                validator: (keyChanged) => keyChanged.isEmpty
+                                validator: (keyChanged) => keyChanged!.isEmpty
                                     ? 'Required field'
                                     : null,
                                 onChanged: (keyChanged) {
@@ -131,7 +134,7 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
                                   labelText: 'Value',
                                 ),
                                 validator: (valueChanged) =>
-                                    valueChanged.isEmpty
+                                    valueChanged!.isEmpty
                                         ? 'Required field'
                                         : null,
                                 onChanged: (valueChanged) {
@@ -142,10 +145,10 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
                               RaisedButton(
                                 child: Text('ADD'),
                                 onPressed: () async {
-                                  if (formKey.currentState.validate()) {
-                                    int valueInt = int.tryParse(value);
-                                    double valueDouble = double.tryParse(value);
-                                    bool valueBool;
+                                  if (formKey.currentState!.validate()) {
+                                    int? valueInt = int.tryParse(value);
+                                    double? valueDouble = double.tryParse(value);
+                                    bool? valueBool;
                                     if (value == 'true' || value == 'false') {
                                       valueBool = value == 'true';
                                     }

@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import '../shared_preferences_monitor.dart';
 
 class KeyValueRow extends StatelessWidget {
-  const KeyValueRow(this.keyname, this.value, {this.onUpdate, this.readOnly});
+  const KeyValueRow(
+    this.keyname,
+    this.value, {
+    this.onUpdate,
+    this.readOnly,
+  });
 
   final String keyname;
   final dynamic value;
-  final VoidCallback onUpdate;
-  final bool readOnly;
+  final VoidCallback? onUpdate;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +52,8 @@ class KeyValueRow extends StatelessWidget {
               onTap: () async {
                 final removed = await SharedPreferencesMonitor.sharedPreferences
                     .remove(keyname);
-                if (removed) {
-                  onUpdate();
+                if (removed && onUpdate != null) {
+                  onUpdate!();
                 }
 
                 Scaffold.of(context).showSnackBar(
@@ -64,7 +69,7 @@ class KeyValueRow extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        FlatButton(
+                        ElevatedButton(
                           child: Text(
                             'UNDO',
                             style: TextStyle(
@@ -86,7 +91,10 @@ class KeyValueRow extends StatelessWidget {
                               await SharedPreferencesMonitor.sharedPreferences
                                   .setBool(keyname, value);
                             }
-                            onUpdate();
+                            if (onUpdate != null) {
+                              onUpdate!();
+                            }
+                            
                           },
                         )
                       ],
@@ -94,7 +102,7 @@ class KeyValueRow extends StatelessWidget {
                   ),
                 );
               },
-              child: readOnly
+              child: (readOnly != null && readOnly!)
                   ? SizedBox()
                   : Icon(
                       Icons.delete,
