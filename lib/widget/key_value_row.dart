@@ -56,7 +56,7 @@ class KeyValueRow extends StatelessWidget {
                   onUpdate!();
                 }
 
-                Scaffold.of(context).showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 2),
                     content: Row(
