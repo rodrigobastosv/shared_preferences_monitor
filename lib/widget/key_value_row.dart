@@ -94,7 +94,6 @@ class KeyValueRow extends StatelessWidget {
                             if (onUpdate != null) {
                               onUpdate!();
                             }
-                            
                           },
                         )
                       ],

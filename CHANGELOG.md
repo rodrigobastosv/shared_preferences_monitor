@@ -1,7 +1,11 @@
+## [2.0.0+2]
+
+- Formatting files
+
 ## [2.0.0+1]
 
 - Updating dependencies
-- 
+
 ## [2.0.0]
 
 - Updating dependencies

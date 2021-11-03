@@ -147,7 +147,8 @@ class _SharedPreferencesWidgetState extends State<SharedPreferencesWidget> {
                                 onPressed: () async {
                                   if (formKey.currentState!.validate()) {
                                     int? valueInt = int.tryParse(value);
-                                    double? valueDouble = double.tryParse(value);
+                                    double? valueDouble =
+                                        double.tryParse(value);
                                     bool? valueBool;
                                     if (value == 'true' || value == 'false') {
                                       valueBool = value == 'true';

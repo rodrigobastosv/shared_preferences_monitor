@@ -16,7 +16,7 @@ class SharedPreferencesMonitor {
     if (key != null) {
       navigatorKey = key;
     }
-    
+
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
