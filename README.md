@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/rodrigobastosv" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 Package created to make it easy to see the state of the shared preferences of your app. I always find myself in a hard spot 
 when trying to see the current state of my preferences. This package come to manage your preferences in an easy way.
  
