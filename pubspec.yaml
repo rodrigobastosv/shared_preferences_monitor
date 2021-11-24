@@ -1,6 +1,6 @@
 name: shared_preferences_monitor
 description: A simple monitor for the Shared Preferences of your app. With it you can manage your preferences and add and delete preferences.
-version: 2.0.0+2
+version: 2.0.0+3
 homepage: https://github.com/rodrigobastosv/shared_preferences_monitor
 
 environment:
